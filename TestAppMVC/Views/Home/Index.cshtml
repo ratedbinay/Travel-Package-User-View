@@ -142,7 +142,7 @@
 
                     <br />
 
-                    <button type="button" class="btn btn-primary" onclick="ShowTable()">Submit</button>
+                    <button type="button" class="btn btn-primary" onclick="ShowTable(); DataForTable();" >Submit</button>
                 </div>
             </div>
         </div>
@@ -152,7 +152,7 @@
     @*   table to show after submit   *@
 
 
-    <table class="table table-striped" id="TableOnSubmit" style=" visibility: hidden">
+    <table class="table table-striped" id="TableOnSubmit" style=" visibility: hidden" onload="DataTaForTable()">
         <thead>
             <tr>
                 <th scope="col">Date</th>
@@ -167,10 +167,10 @@
         </thead>
         <tbody>
             <tr>
-                <th scope="row" id="TableDate"></th>
+                <th id="TableDate"></th>
                 <td>Kathmandu</td>
                 <td>Manakamana</td>
-                <td></td>
+                <td id="NumberOfPax"></td>
                 <td></td>
                 <td></td>
                 <td><button type="submit" class="btn btn-primary">Book Ticket</button></td>
@@ -279,7 +279,15 @@
 
         //document.getElementById("TableDate").innerHTML = datetd;
 
-    
+    function DataForTable() {
+
+        var datee = document.getElementById("TravelDate").value;
+        //console.log(datee);
+        document.getElementById("TableDate").innerHTML = datee;
+       
+        document.getElementById('NumberOfPax').innerHTML = document.getElementById('Passanger_Total').value;
+        
+    }
 
     </script>
 </body>
