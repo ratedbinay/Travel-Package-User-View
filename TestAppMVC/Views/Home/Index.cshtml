@@ -1,0 +1,253 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<html>
+<head>
+
+    <link type="text/css" href="~/Content/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+
+    <form>
+        <br />
+        <div class="container">
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="TravelDate">Date</label>
+                    <input type="date" class="form-control" min="date.today" id="TravelDate" placeholder="Date">
+
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="Nationality">Nationality</label>
+
+                    <select name="Nationality" class="form-control" id="Nationality">
+                        <option value="">-- select one --</option>
+                        <option value="Nepali">Nepali</option>
+                        <option value="Indian">Indian</option>
+                        <option value="SAARC">SAARC</option>
+                        <option value="Others">Others</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="TravelFrom">From</label>
+                        @*<input type="text" class="form-control" id="TravekFrom" placeholder="From">*@
+                        <select name="TravekFrom" class="form-control" id="TravekFrom">
+                            <option value="Kathmandu">Kathmandu</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="TravelTo">To</label>
+                        @*<input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">*@
+                        <select name="TravekTo" class="form-control" id="TravekTo">
+                            <option value="Manakamana">Manakamana</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="form-group">
+                <div class="form-group col-md-3">
+                    <label for="PackageType">Package Type</label>
+                    <select name="PackageType" class="form-control" id="PackageType" onchange="change(this)">
+                        <option value="">-- select one --</option>
+                        <option value="FullPackage">Full Package</option>
+                        <option value="TicketOnly">Ticket Only</option>
+
+                    </select>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div id="VehicleTypes" style="display: none">
+            <div class="container">
+                <div class="form-group col-md-3">
+                    <p class="font-weight-bold">
+                        <h4>Vehicle Type:   </h4>
+
+                        <label class="radio-inline">
+                            <input type="radio" name="VehicleType">Bus
+                        </label>
+
+                        <label class="radio-inline">
+                            <input type="radio" name="VehicleType">Jumbo Hiace
+                        </label>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <h3>Enter Number of People   </h3>
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-2 ol-md-offset-2">
+                            <label for="Passanger_Adult">Adult</label>
+                            <input onblur="findTotal()" type="number" class="form-control" name="Passanger_Number" id="Passanger_Adult">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label for="Passanger_Child">Child</label>
+                            <input onblur="findTotal()" type="number" class="form-control" name="Passanger_Number" id="Passanger_Child">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label for="Passanger_Student">Student</label>
+                            <input onblur="findTotal()" type="number" class="form-control" name="Passanger_Number" id="Passanger_Student">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label for="Passanger_Elder">Elder</label>
+                            <input onblur="findTotal()" type="number" class="form-control" name="Passanger_Number" id="Passanger_Elder">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label for="Passanger_Disabled">Disabled</label>
+                            <input onblur="findTotal()" type="number" class="form-control" name="Passanger_Number" id="Passanger_Disabled">
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="form-group">
+                <div class="form-group col-md-3">
+                    <p class="font-weight-bold">
+                        <h4>Total  </h4>
+                    </p>
+                    <input type="text" class="form-control" id="Passanger_Total" disabled="disabled">
+
+                    <br />
+
+                    <button type="button" class="btn btn-primary" onclick="ShowTable()">Submit</button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    @*   table to show after submit   *@
+
+
+    <table class="table table-striped" id="TableOnSubmit" style=" visibility: hidden">
+        <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">From</th>
+                <th scope="col">To</th>
+                <th scope="col">Number of PAX</th>
+                <th scope="col">Vehicle Type</th>
+                <th scope="col">Price</th>
+                <th scope="col"> </th>
+                <th scope="col"> </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row"  onload="GetValueForTable()"><a id="TableDate"> </a></th>
+                <td>Kathmandu</td>
+                <td>Manakamana</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><button type="submit" class="btn btn-primary">Book Ticket</button></td>
+                <td><button type="button" class="btn btn-secondary">See Details</button></td>
+            </tr>
+
+        </tbody>
+    </table>
+
+</body>
+  
+
+
+@*  javascript part  *@
+
+<body>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <script type="text/javascript">
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+
+        today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById("TravelDate").setAttribute("min", today);
+
+
+        function findTotal() {
+            var arr = document.getElementsByName('Passanger_Number');
+            var tot = 0;
+            for (var i = 0; i < arr.length; i++) {
+                if (parseInt(arr[i].value))
+                    tot += parseInt(arr[i].value);
+            }
+            document.getElementById('Passanger_Total').value = tot;
+        }
+
+
+
+
+
+        function change(obj) {
+
+
+            var selectBox = obj;
+            var selected = selectBox.options[selectBox.selectedIndex].value;
+            var VehicleTypes = document.getElementById("VehicleTypes");
+
+            if (selected === 'FullPackage') {
+                VehicleTypes.style.display = "block";
+            }
+            else {
+                VehicleTypes.style.display = "none";
+            }
+            }
+
+
+    function ShowTable(){
+        document.getElementById('TableOnSubmit').style.visibility = "visible";
+    }
+
+
+
+    function GetValueForTable() {
+        document.getElementById("TableDate").value = document.getElementById("TravelDate").value;
+    }
+
+    </script>
+</body>
+
+</html>
