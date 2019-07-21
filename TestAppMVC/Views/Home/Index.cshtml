@@ -14,13 +14,13 @@
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="TravelDate">Date</label>
-                    <input type="date" class="form-control" min="date.today" id="TravelDate" placeholder="Date">
+                    <input type="date" class="form-control" id="TravelDate"   >
 
                 </div>
                 <div class="form-group col-md-3">
                     <label for="Nationality">Nationality</label>
 
-                    <select name="Nationality" class="form-control" id="Nationality">
+                    <select name="Nationality" class="form-control" id="Nationality" >
                         <option value="">-- select one --</option>
                         <option value="Nepali">Nepali</option>
                         <option value="Indian">Indian</option>
@@ -167,7 +167,7 @@
         </thead>
         <tbody>
             <tr>
-                <th scope="row"  onload="GetValueForTable()"><a id="TableDate"> </a></th>
+                <th scope="row" id="TableDate"></th>
                 <td>Kathmandu</td>
                 <td>Manakamana</td>
                 <td></td>
@@ -181,7 +181,7 @@
     </table>
 
 </body>
-  
+
 
 
 @*  javascript part  *@
@@ -191,7 +191,13 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+
     <script type="text/javascript">
+
+        //setting lower limitation to date as today's date
+        //
+
         var today = new Date();
         var dd = today.getDate();
         var mm = today.getMonth() + 1; //January is 0!
@@ -207,6 +213,20 @@
         document.getElementById("TravelDate").setAttribute("min", today);
 
 
+
+    //when user picks date
+        //
+
+
+    //function newDateFromForm() {
+    //    var DateForTable = TravelDate.getDate();
+    //}
+
+
+
+        //finding total number of people
+        //
+
         function findTotal() {
             var arr = document.getElementsByName('Passanger_Number');
             var tot = 0;
@@ -219,7 +239,8 @@
 
 
 
-
+        //showing vehicle type if full package is selected
+        //
 
         function change(obj) {
 
@@ -234,18 +255,31 @@
             else {
                 VehicleTypes.style.display = "none";
             }
-            }
+        }
+
+        //showing table on clicking submit button
+        //
+
+        function ShowTable() {
+            //var datetd = document.getElementById("TravelDate").value;
+            document.getElementById('TableOnSubmit').style.visibility = "visible";
+
+            //document.getElementById('TableDate').innerHTML =DateForTable;
+
+           // document.getElementById('TableDate').innerHTML = document.getElementById('DateForTable').value;
+        }
 
 
-    function ShowTable(){
-        document.getElementById('TableOnSubmit').style.visibility = "visible";
-    }
 
+        //function GetValueForTable() {
 
+        //    var date = document.getElementById("TravelDate").value;
+        //    document.getElementById("TableDate").value = date;
+        //        }
 
-    function GetValueForTable() {
-        document.getElementById("TableDate").value = document.getElementById("TravelDate").value;
-    }
+        //document.getElementById("TableDate").innerHTML = datetd;
+
+    
 
     </script>
 </body>
