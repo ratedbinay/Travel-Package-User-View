@@ -1,6 +1,4 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
+﻿
 <html>
 <head>
 
@@ -173,7 +171,11 @@
                 <td id="NumberOfPax"></td>
                 <td></td>
                 <td></td>
-                <td><button type="submit" class="btn btn-primary">Book Ticket</button></td>
+                <td>
+                    <form>
+                        <input type="submit" class="btn btn-primary" value="Book"  onclick="window.location.href='UserDetail.cshtml' " />
+                    </form>
+                </td>
                 <td><button type="button" class="btn btn-secondary">See Details</button></td>
             </tr>
 
@@ -287,7 +289,10 @@
        
         document.getElementById('NumberOfPax').innerHTML = document.getElementById('Passanger_Total').value;
         
-    }
+            }
+
+
+            
 
     </script>
 </body>
